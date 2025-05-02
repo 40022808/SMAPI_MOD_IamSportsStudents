@@ -1,0 +1,10 @@
+{
+    "Name": "<我是体育生>",
+    "Author": "<中二魔王夜空>",
+    "Version": "0.0.1",
+    "Description": "<一句话简单描述你的模组是干什么的>", //（可选）
+    "UniqueID": "<中二魔王夜空>.<我是体育生>",
+    "EntryDll": "<IamSportsStudents>.dll",
+    "MinimumApiVersion": "4.0.0",
+    "UpdateKeys": [] //（可选）常用的更新键："Nexus:???", "Gtihub:user/repository", "Moddrop:???"
+}
