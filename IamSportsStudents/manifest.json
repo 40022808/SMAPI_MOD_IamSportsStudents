@@ -6,5 +6,5 @@
     "UniqueID": "中二魔王夜空.我是体育生",
     "EntryDll": "IamSportsStudents.dll",
     "MinimumApiVersion": "4.0.0",
-    "UpdateKeys": [] //（可选）常用的更新键："Nexus:???", "Gtihub:user/repository", "Moddrop:???"
+    "UpdateKeys": [ "GitHub:40022808/SMAPI_MOD_IamSportsStudents" ] //（可选）常用的更新键："Nexus:???", "Gtihub:user/repository", "Moddrop:???"
 }
