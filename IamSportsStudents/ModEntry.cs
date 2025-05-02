@@ -37,7 +37,7 @@ namespace IamSportsStudents
             if (Game1.player.maxStamina.Value > expectedMaxStamina)
             {
                 initialphysicalstrengthlimit = Game1.player.maxStamina.Value - staminaData.ExtraStamina;
-                this.Monitor.Log($"检测到玩家体力提升（可能是星之果实），更新原始体力上限为 {initialphysicalstrengthlimit}", LogLevel.Info);
+                
             }
 
             int ExtraMaxStamina = (int)(staminaData.ExtraStamina + initialphysicalstrengthlimit);
@@ -58,7 +58,7 @@ namespace IamSportsStudents
             if (staminaLost > 0) // 只累积消耗的体力（不会因体力恢复影响计算）
             {
                 accumulatedStaminaLoss += staminaLost; // 累积体力消耗
-                this.Monitor.Log($"玩家累计消耗了 {accumulatedStaminaLoss} 体力", LogLevel.Info);
+                
             }
 
             if (accumulatedStaminaLoss >= 10) // 当累计消耗达到 10 点时，提升最大体力
@@ -73,7 +73,7 @@ namespace IamSportsStudents
                 this.Helper.Data.WriteGlobalData(StaminaKey, new StaminaData { ExtraStamina = extraStamina });
 
                 ApplyPermanentStaminaIncrease(extraStamina2);
-                this.Monitor.Log($"玩家永久提升体力至 {Game1.player.maxStamina.Value + extraStamina2}, 提升量:[{extraStamina2}],之前体力上限[{Game1.player.maxStamina.Value}]", LogLevel.Info);
+                
             }
 
             previousStamina = currentStamina;
