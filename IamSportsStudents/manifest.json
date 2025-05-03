@@ -1,10 +1,16 @@
 {
     "Name": "我是体育生",
     "Author": "中二魔王夜空",
-    "Version": "1.0.4",
+    "Version": "1.1.0",
     "Description": "每消耗10点体力就会永久提升一点体力上限.",
     "UniqueID": "中二魔王夜空.我是体育生",
     "EntryDll": "IamSportsStudents.dll",
     "MinimumApiVersion": "4.0.0",
-    "UpdateKeys": [ "GitHub:40022808/SMAPI_MOD_IamSportsStudents" ]
+    "UpdateKeys": [ "GitHub:40022808/SMAPI_MOD_IamSportsStudents" ],
+    "Dependencies": [
+        {
+            "UniqueID": "spacechase0.GenericModConfigMenu",
+            "IsRequired": false
+        }
+    ]
 }
