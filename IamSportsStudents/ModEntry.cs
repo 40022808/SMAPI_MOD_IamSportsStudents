@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 using GenericModConfigMenu;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
@@ -25,9 +26,59 @@ namespace IamSportsStudents
             helper.Events.GameLoop.DayStarted += this.OnDayStarted; // 每天开始时应用额外体力
             helper.Events.GameLoop.UpdateTicked += this.OnUpdateTicked; // 监听体力消耗       
             helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
-            
-
+            helper.Events.Display.RenderedHud += this.OnRenderedHud;
         }
+
+        private void OnRenderedHud(object sender, RenderedHudEventArgs e)
+        {
+            // 获取玩家当前体力和体力上限
+            int currentStamina = (int)Game1.player.stamina;
+            int maxStamina = (int)Game1.player.maxStamina.Value;
+
+            // 如果体力值超过 10000，则转换为 "万" 单位，保留 1 位小数
+            string formattedStamina = currentStamina >= 10000 ? $"{currentStamina / 10000f:F0}万" : $"{currentStamina}";
+            string formattedMaxStamina = maxStamina >= 10000 ? $"{maxStamina / 10000f:F0}万" : $"{maxStamina}";
+
+            // 获取当前 UI 状态（是否显示生命条）
+            bool isHealthBarVisible = Game1.showingHealthBar;
+
+            // **如果生命条可见，则额外左移一定距离**
+            int offset = isHealthBarVisible ? 50 : 0;
+
+            // 定义位置
+            int barX = (int)(Game1.viewport.Width * 0.96) - offset;
+            int barY = Game1.viewport.Height - 55;
+
+            // 数值文本
+            string staminaText = $"体力:{formattedStamina}/{formattedMaxStamina}";
+
+            // 计算文本宽度
+            float textWidth = Game1.dialogueFont.MeasureString(staminaText).X;
+
+            // 调整文本位置，使其左移一定距离
+            Vector2 textPosition = new Vector2(barX - textWidth, barY);
+
+            // 设定文本描边的偏移值
+            Vector2[] outlineOffsets = new Vector2[]
+            {
+        new Vector2(-2, 0),  // 左
+        new Vector2(2, 0),   // 右
+        new Vector2(0, -2),  // 上
+        new Vector2(0, 2)    // 下
+            };
+
+            // 绘制黑色描边（先绘制黑色文本）
+            foreach (Vector2 offsetVector in outlineOffsets)
+            {
+                e.SpriteBatch.DrawString(Game1.dialogueFont, staminaText, textPosition + offsetVector, Color.Black);
+            }
+
+            // 绘制原本的白色文本（覆盖黑色描边）
+            e.SpriteBatch.DrawString(Game1.dialogueFont, staminaText, textPosition, Color.White);
+        }
+
+
+
 
 
         private void OnGameLaunched(object sender, GameLaunchedEventArgs e)
