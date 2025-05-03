@@ -31,6 +31,12 @@ namespace IamSportsStudents
 
         private void OnRenderedHud(object sender, RenderedHudEventArgs e)
         {
+            // **如果正在过剧情，直接退出，不绘制文本**
+            if (Game1.eventUp || Game1.activeClickableMenu != null)
+            {
+                return;
+            }
+
             // 获取玩家当前体力和体力上限
             int currentStamina = (int)Game1.player.stamina;
             int maxStamina = (int)Game1.player.maxStamina.Value;
@@ -61,10 +67,10 @@ namespace IamSportsStudents
             // 设定文本描边的偏移值
             Vector2[] outlineOffsets = new Vector2[]
             {
-        new Vector2(-2, 0),  // 左
-        new Vector2(2, 0),   // 右
-        new Vector2(0, -2),  // 上
-        new Vector2(0, 2)    // 下
+                new Vector2(-2, 0),  // 左
+                new Vector2(2, 0),   // 右
+                new Vector2(0, -2),  // 上
+                new Vector2(0, 2)    // 下
             };
 
             // 绘制黑色描边（先绘制黑色文本）
