@@ -136,18 +136,7 @@ namespace IamSportsStudents
             StaminaData staminaData = this.Helper.Data.ReadGlobalData<StaminaData>(StaminaKey) ?? new StaminaData();
 
             // **存储原始体力上限**
-            if (initialphysicalstrengthlimit == 0)
-            {
-                initialphysicalstrengthlimit = Game1.player.maxStamina.Value; // 只记录一次游戏初始的体力上限
-            }
-
-            // **防止无限增长：只有当最大体力增长大于当前模组累计值时，才更新**
-            int expectedMaxStamina = (int)(initialphysicalstrengthlimit + staminaData.ExtraStamina);
-            if (Game1.player.maxStamina.Value > expectedMaxStamina)
-            {
-                initialphysicalstrengthlimit = Game1.player.maxStamina.Value - staminaData.ExtraStamina;
-                
-            }
+            initialphysicalstrengthlimit = Game1.player.maxStamina.Value - staminaData.ExtraStamina;
 
             int ExtraMaxStamina = (int)(staminaData.ExtraStamina + initialphysicalstrengthlimit);
 
